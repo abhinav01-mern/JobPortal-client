@@ -1,4 +1,5 @@
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -17,7 +18,7 @@ useEffect(() => {
   const fetchJob = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/createjob/${id}`
+        `${API_URL}/api/createjob/${id}`
       );
 
       setJob(res.data);
@@ -80,11 +81,11 @@ data.append("location", job.location);
     data.append("resume", formData.resume);
 
     const response = await axios.post(
-      "http://localhost:5000/api/applyjob",
+      `${API_URL}/api/applyjob`,
       data,
       {
         headers: {
-          "Content-Type": "multipart/form-data",
+          
           Authorization: `Bearer ${token}`,
         },
       }
@@ -95,12 +96,12 @@ data.append("location", job.location);
     navigate("/Home");
 
   } catch (error) {
+  console.log("ERROR:", error.response?.data || error);
 
-    console.log(error);
-
-    alert("Upload Failed");
-
-  }
+  alert(
+    error.response?.data?.message || "Upload Failed"
+  );
+}
 };
 
 
@@ -201,7 +202,7 @@ data.append("location", job.location);
                 value={formData.experience}
                 onChange={handleChange}
               >
-                <option>Select Experience</option>
+                <option value="">Select Experience</option>
                 <option>Fresher</option>
                 <option>1 Year</option>
                 <option>2 Years</option>
@@ -215,6 +216,7 @@ data.append("location", job.location);
               <input
                 type="file"
                 name="resume"
+                accept=".pdf,.doc,.docx"
                 onChange={handleChange}
               />
             </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 import { useNavigate } from "react-router-dom";
 
 
@@ -8,7 +9,7 @@ function CreateJob() {
   const navigate = useNavigate();
 
 
-   const API_URL = "http://localhost:5000/api/createjob";
+   const CREATE_JOB_API = `${API_URL}/api/createjob`;
 
   const [jobData, setJobData] = useState({
     title: "",
@@ -41,7 +42,7 @@ function CreateJob() {
     console.log("TOKEN =", token);
 
     await axios.post(
-      API_URL,
+      CREATE_JOB_API,
       jobData,
       {
         headers: {

@@ -1,4 +1,5 @@
 import axios from 'axios';
+const API_URL = import.meta.env.VITE_API_URL;
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
@@ -21,12 +22,12 @@ function Home() {
     const [search, setSearch] = useState("");
 
 
-   const API_URL = "http://localhost:5000/api/createjob";
+   const JOB_API = `${API_URL}/api/createjob`;
 
     const fetchHome= async()=>{
     console.log("inside fetchuser");
 
-    const res = await axios.get(API_URL);
+    const res = await axios.get(JOB_API);
      console.log(res);
 
         setdata1(res.data);
@@ -48,7 +49,7 @@ function Home() {
       try {
         const token = localStorage.getItem("token");
 
-        await axios.get("http://localhost:5000/api/auth/home", {
+        await axios.get(`${API_URL}/api/auth/home`, {
           headers: {
   Authorization: `Bearer ${token}`,
 }

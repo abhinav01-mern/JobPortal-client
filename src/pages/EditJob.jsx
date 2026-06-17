@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 import { useNavigate, useParams } from "react-router-dom";
 
 function EditJob() {
@@ -26,7 +27,7 @@ function EditJob() {
   const fetchJob = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/createjob/${id}`
+        `${API_URL}/api/createjob/${id}`
       );
       setJobData(res.data);
     } catch (error) {
@@ -48,7 +49,7 @@ function EditJob() {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `http://localhost:5000/api/createjob/${id}`,
+        `${API_URL}/api/createjob/${id}`,
         jobData,
         {
           headers: {

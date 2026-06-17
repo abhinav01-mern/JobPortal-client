@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 import { useState } from 'react';
 import { useEffect } from 'react'
 import { Link } from "react-router-dom";
@@ -7,14 +8,14 @@ import { useNavigate } from "react-router-dom";
 
 function JobListing() {
 
-  const API_URL = "http://localhost:5000/api/createjob";
+  const CREATE_JOB_API = `${API_URL}/api/createjob`;
 
    const [jobData2, setJobData2] = useState([])
 
    const fetchCreatejob= async()=>{
     console.log("inside fetchuser");
 
-    const res = await axios.get(API_URL);
+    const res = await axios.get(CREATE_JOB_API);
      console.log(res);
 
         setJobData2(res.data);

@@ -1,9 +1,13 @@
 import React from "react";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Applicants() {
+
+  
+
   const navigate = useNavigate();
 
 
@@ -19,7 +23,7 @@ function Applicants() {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(
-        "http://localhost:5000/api/applyjob/recruiter-applicants",
+        `${API_URL}/api/applyjob/recruiter-applicants`,
          {
         headers: {
           Authorization: `Bearer ${token}`, 
@@ -47,7 +51,7 @@ function Applicants() {
     return;
   }
 
-  window.open(`http://localhost:5000/uploads/${resume}`, "_blank");
+ window.open(resume, "_blank");
 };
 
 const updateStatus = async (id, status) => {
@@ -55,7 +59,7 @@ const updateStatus = async (id, status) => {
     const token = localStorage.getItem("token");
 
     await axios.put(
-      `http://localhost:5000/api/applyjob/status/${id}`,
+      `${API_URL}/api/applyjob/status/${id}`,
       { status },
       {
         headers: {

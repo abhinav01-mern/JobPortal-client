@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 import { useNavigate } from 'react-router-dom'
 
 
 function Login() {
+
+  
+
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -15,19 +19,14 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("abc");
+    console.log(API_URL);
 
 
    try {
-      // const res = await axios.post(
-      //   "http://localhost:5000/api/auth/login",
-      //   loginData
-      // );
-
-      // localStorage.setItem("token", `Bearer ${res.data.token}`);
-      // navigate("/home");
+     
 
       const res = await axios.post(
-  "http://localhost:5000/api/auth/login",
+  `${API_URL}/api/auth/login`,
   loginData
 );
 
@@ -101,7 +100,7 @@ else {
               <span>Forgot Password?</span>
             </div> */}
 
-            <button type="submit" className="login-btn" onClick={handleSubmit}>
+            <button type="submit" className="login-btn">
               Login
             </button>
 

@@ -1,4 +1,5 @@
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +18,7 @@ const fetchRecruiters = async () => {
     const token = localStorage.getItem("token");
 
     const res = await axios.get(
-      "http://localhost:5000/api/admin/recruiters",
+      `${API_URL}/api/admin/recruiters`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -37,7 +38,7 @@ const approveRecruiter = async (id) => {
   const token = localStorage.getItem("token");
 
   await axios.put(
-    `http://localhost:5000/api/admin/approve/${id}`,
+    `${API_URL}/api/admin/approve/${id}`,
     {},
     {
       headers: {
@@ -54,7 +55,7 @@ const rejectRecruiter = async (id) => {
   const token = localStorage.getItem("token");
 
   await axios.put(
-    `http://localhost:5000/api/admin/reject/${id}`,
+    `${API_URL}/api/admin/reject/${id}`,
     {},
     {
       headers: {
@@ -71,7 +72,7 @@ const deleteRecruiter = async (id) => {
   const token = localStorage.getItem("token");
 
   await axios.delete(
-    `http://localhost:5000/api/admin/delete/${id}`,
+    `${API_URL}/api/admin/delete/${id}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

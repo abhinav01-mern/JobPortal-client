@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +18,7 @@ function CandidateDashboard() {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(
-        "http://localhost:5000/api/applyjob",
+        `${API_URL}/api/applyjob`,
          {
     headers: {
       Authorization: `Bearer ${token}`, 
